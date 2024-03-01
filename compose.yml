@@ -1,4 +1,9 @@
 services:
+  minitwit-database:
+    container_name: minitwit-database
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1433:1433
   minitwit-service:
     container_name: minitwit-container
     image: ghcr.io/DevOps-GroupF/itu-minitwit-devops:main
