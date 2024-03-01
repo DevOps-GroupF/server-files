@@ -3,7 +3,7 @@ services:
     container_name: minitwit-database
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      - ACCEPT_EULA="Y"
+      - ACCEPT_EULA: "Y"
       - MSSQL_SA_PASSWORD: "sERVERaDMINISTRATOR"
       - MSSQL_PID: "Minitwit"  # Specify the edition if needed
       - MSSQL_USER: "Minitwit"
