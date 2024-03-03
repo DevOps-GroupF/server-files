@@ -6,6 +6,6 @@ REGISTRY="ghcr.io"
 echo $GH_PASS | docker login $REGISTRY -u $GH_USER --password-stdin 
 docker compose pull
 docker compose up -d
-docker logout
+docker logout $REGISTRY 
 
 exit 0
