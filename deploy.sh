@@ -1,6 +1,6 @@
 #! /bin/bash
-GH_USER="DevOps-GroupF"
-GH_PASS=$(cat /deployment/secrets/github)
+GH_USER=$(cat /deployment/secrets/github_pck_user)
+GH_PASS=$(cat /deployment/secrets/github_pck_token)
 REGISTRY="ghcr.io"
 
 echo $GH_PASS | docker login $REGISTRY -u $GH_USER --password-stdin 
