@@ -3,7 +3,7 @@ services:
     container_name: minitwit-container
     image: ghcr.io/devops-groupf/itu-minitwit-devops:latest
     environment:
-      - DB_CONN_STRING=/run/secrets/db_secret
+      - DB_CONN_STRING_FILE=/run/secrets/db_secret
     secrets:
       - db_secret
     ports:
