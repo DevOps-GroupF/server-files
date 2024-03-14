@@ -1,11 +1,14 @@
 services:
-  minitwit-database:
-    container_name: minitwit-database
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    ports:
-      - 127.0.0.1:1433:1433
   minitwit-service:
     container_name: minitwit-container
     image: ghcr.io/devops-groupf/itu-minitwit-devops:latest
+    environment:
+      - DB_CONN_STRING: /run/secrets/db_secret
+    secrets:
+      - db_secret
     ports:
       - 8080:8080
+
+secrets:
+  db_secret:
+    file: ${DB_CONN_STRING_LOC}
