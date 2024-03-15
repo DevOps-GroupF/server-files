@@ -16,6 +16,8 @@ services:
     depends_on:
       - grafana
       - prometheus
+    networks:
+      - itu-minitwit-network
 
   prometheus:
     image: prom/prometheus
