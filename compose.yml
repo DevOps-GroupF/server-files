@@ -8,9 +8,7 @@ services:
     container_name: minitwit-container
     image: ghcr.io/devops-groupf/itu-minitwit-devops:latest
     environment:
-      - DB_CONN_STRING_FILE=/run/secrets/db_secret
-    secrets:
-      - db_secret
+      - DB_CONN_STRING=${DB_CONN_STRING}
     ports:
       - 8080:8080
     depends_on:
@@ -37,6 +35,3 @@ services:
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASS}
 
-secrets:
-  db_secret:
-    file: ${DB_CONN_STRING_LOC}
