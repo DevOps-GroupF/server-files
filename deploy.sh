@@ -3,7 +3,8 @@ echo "Setting env variables"
 GH_USER=$(cat /deployment/secrets/github_pck_user)
 GH_PASS=$(cat /deployment/secrets/github_pck_token)
 export DB_CONN_STRING_LOC="/deployment/secrets/db_conn_string"
-export GRAFANA_PW_STRING_LOC="/deployment/secrets/grafana_password"
+# export GRAFANA_PW_STRING_LOC="/deployment/secrets/grafana_password"
+export GRAFANA_PASS=$(cat /deployment/secrets/grafana_password)
 REGISTRY="ghcr.io"
 
 echo "Logging in to github package repo"
