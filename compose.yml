@@ -20,8 +20,8 @@ services:
       - itu-minitwit-network
 
   prometheus:
-    image: prom/prometheus
-    container_name: prometheus
+    image: prom/prometheus:v2.51.0-rc.0
+    container_name: prometheus-container
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
@@ -29,6 +29,7 @@ services:
 
   grafana:
     image: grafana/grafana:10.2.4
+    container_name: grafana-container
     ports:
       - "3000:3000"
     networks:
