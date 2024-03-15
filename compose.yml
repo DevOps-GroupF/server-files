@@ -33,7 +33,11 @@ services:
       - "3000:3000"
     networks:
       - itu-minitwit-network
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana_secret
 
 secrets:
   db_secret:
     file: ${DB_CONN_STRING_LOC}
+  grafana_secret:
+    file: ${GRAFANA_PW_STRING_LOC}
