@@ -34,4 +34,9 @@ services:
       - itu-minitwit-network
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASS}
+    volumes:
+      - ./grafana_dashboard_setup.yaml:/etc/grafana/provisioning/dashboards/grafana_dashboard_setup.yaml
+      - ./prometheus_dashboards.json:/var/lib/grafana/dashboards/prometheus_dashboards.json
+      - ./prometheus_datasource.yaml:/etc/grafana/provisioning/datasources/prometheus_datasource.yaml
+
 
