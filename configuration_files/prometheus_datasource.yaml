@@ -57,3 +57,25 @@ datasources:
     # <bool> Allows users to edit data sources from the
     # Grafana UI.
     editable: true
+
+  - name: Minitwit-database
+    type: mssql
+    access: proxy
+    orgId: 1
+    uid: minitwit-database
+    url: minitwit-database:1433
+    user: sa
+    database:
+      master
+    basicAuth:
+      false
+    basicAuthUser:
+      minitwit-db-admin
+    withCredentials:
+    isDefault:
+      false
+    jsonData:
+    secureJsonData:
+      password: ${DB_CONN_PASSWORD}
+    version: 1
+    editable: true
