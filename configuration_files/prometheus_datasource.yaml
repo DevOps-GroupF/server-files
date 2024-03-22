@@ -66,7 +66,7 @@ datasources:
     url: ${DB_CONN_URL}
     user: ${DB_CONN_USER}
     database:
-      master
+      minitwit-db
     basicAuth:
       false
     basicAuthUser:
