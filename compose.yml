@@ -21,7 +21,7 @@ services:
     image: prom/prometheus:v2.51.0-rc.0
     container_name: prometheus-container
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./configuration_files/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
       - itu-minitwit-network
 

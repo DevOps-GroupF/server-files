@@ -63,14 +63,14 @@ datasources:
     access: proxy
     orgId: 1
     uid: minitwit-database
-    url: minitwit-database:1433
+    url: ${DB_CONN_URL}
     user: sa
     database:
       master
     basicAuth:
       false
     basicAuthUser:
-      minitwit-db-admin
+      ${DB_CONN_USER}
     withCredentials:
     isDefault:
       false
