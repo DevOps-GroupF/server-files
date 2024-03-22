@@ -64,7 +64,7 @@ datasources:
     orgId: 1
     uid: minitwit-database
     url: ${DB_CONN_URL}
-    user: sa
+    user: ${DB_CONN_USER}
     database:
       master
     basicAuth:
