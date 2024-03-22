@@ -70,7 +70,7 @@ datasources:
     basicAuth:
       false
     basicAuthUser:
-      minitwit-db-admin
+      ${DB_CONN_USER}
     withCredentials:
     isDefault:
       false
