@@ -7,6 +7,9 @@ export DB_CONN_USER=$(cat /deployment/secrets/db_conn_user)
 export DB_CONN_PASSWORD=$(cat /deployment/secrets/db_conn_password)
 export DB_CONN_STRING=$(cat /deployment/secrets/db_conn_string)
 export GRAFANA_PASS=$(cat /deployment/secrets/grafana_password)
+export GRAFANA_USER_USERNAME=$(cat /deployment/secrets/grafana_user_username)
+export GRAFANA_USER_PASSWORD=$(cat /deployment/secrets/grafana_user_password)
+export GRAFANA_USER_EMAIL=$(cat /deployment/secrets/grafana_user_email)
 REGISTRY="ghcr.io"
 
 echo "Logging in to github package repo"
@@ -20,6 +23,9 @@ docker compose up -d
 
 echo "Logging out of github package repo"
 docker logout $REGISTRY
+
+cd configuration_files
+./grafana_user_setup.sh
 
 echo "Deploy script done"
 exit 0
