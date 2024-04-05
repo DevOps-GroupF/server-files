@@ -45,3 +45,6 @@ services:
       - ./configuration_files/grafana_dashboard_1.json:/var/lib/grafana/dashboards/grafana_dashboard_1.json
       - ./configuration_files/prometheus_datasource.yaml:/etc/grafana/provisioning/datasources/prometheus_datasource.yaml
 
+volumes:
+  grafana_data:
+  prometheus_data:
