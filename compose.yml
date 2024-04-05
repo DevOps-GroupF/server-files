@@ -21,6 +21,7 @@ services:
     image: prom/prometheus:v2.51.0-rc.0
     container_name: prometheus-container
     volumes:
+      - prometheus_data:/prometheus
       - ./configuration_files/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
       - itu-minitwit-network
@@ -38,6 +39,7 @@ services:
       - DB_CONN_USER=${DB_CONN_USER}
       - DB_CONN_PASSWORD=${DB_CONN_PASSWORD}
     volumes:
+      - grafana_data:/var/lib/grafana
       - ./configuration_files/grafana_dashboard_setup.yaml:/etc/grafana/provisioning/dashboards/grafana_dashboard_setup.yaml
       - ./configuration_files/grafana_dashboard_0.json:/var/lib/grafana/dashboards/grafana_dashboard_0.json
       - ./configuration_files/grafana_dashboard_1.json:/var/lib/grafana/dashboards/grafana_dashboard_1.json
