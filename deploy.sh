@@ -30,7 +30,7 @@ docker compose up -d
 echo "--Logging out of github package repo--"
 docker logout $REGISTRY
 
-cd configuration_files
-./grafana_user_setup.sh
+echo "--Executing the post-setup for grafana--"
+./configuration_files/grafana_user_setup.sh
 
 exit 0
