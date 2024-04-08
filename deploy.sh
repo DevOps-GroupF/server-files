@@ -13,12 +13,14 @@ export GRAFANA_USER_EMAIL=$(cat /deployment/secrets/grafana_user_email)
 REGISTRY="ghcr.io"
 
 echo "Logging in to github package repo"
+cp /deployment/secrets/logging.env .env
 echo $GH_PASS | docker login $REGISTRY -u $GH_USER --password-stdin
 
 echo "Pulling the image"
 docker compose pull
 
 echo "Starting the container"
+docker compose up setup
 docker compose up -d
 
 echo "Logging out of github package repo"
