@@ -1,5 +1,5 @@
 #! /bin/bash
-echo "Setting env variables"
+echo "--Setting env variables--"
 GH_USER=$(cat /deployment/secrets/github_pck_user)
 GH_PASS=$(cat /deployment/secrets/github_pck_token)
 export DB_CONN_URL=$(cat /deployment/secrets/db_conn_url)
@@ -12,20 +12,20 @@ export GRAFANA_USER_PASSWORD=$(cat /deployment/secrets/grafana_user_password)
 export GRAFANA_USER_EMAIL=$(cat /deployment/secrets/grafana_user_email)
 REGISTRY="ghcr.io"
 
-echo "Logging in to github package repo"
+echo "--Logging in to github package repo--"
 echo $GH_PASS | docker login $REGISTRY -u $GH_USER --password-stdin
 
-echo "Pulling the image"
+echo "--Pulling the images--"
 docker compose pull
 
-echo "Starting the container"
+
+echo "--Starting the container--"
 docker compose up -d
 
-echo "Logging out of github package repo"
+echo "--Logging out of github package repo--"
 docker logout $REGISTRY
 
-cd configuration_files
-./grafana_user_setup.sh
+echo "--Executing the post-setup for grafana--"
+./configuration_files/grafana_user_setup.sh
 
-echo "Deploy script done"
 exit 0
