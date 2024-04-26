@@ -73,6 +73,7 @@ services:
   
   fluentd:
     image: fluent/fluentd:v1.12-debian
+    container_name: fluentd
     volumes:
       - ./configuration_files/fluent.conf:/fluentd/etc/fluent.conf
       - /var/log/fluentd:/fluentd/log
