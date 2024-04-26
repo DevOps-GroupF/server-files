@@ -16,6 +16,10 @@ services:
       - prometheus
     networks:
       - itu-minitwit-network
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   prometheus:
     image: prom/prometheus:v2.51.0-rc.0
