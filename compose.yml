@@ -14,12 +14,16 @@ services:
     depends_on:
       - grafana
       - prometheus
+      - fluentd
     networks:
       - itu-minitwit-network
     logging:
+      driver: fluentd
       options:
-        max-size: "10m"
-        max-file: "3"
+        fluentd-async-connect: "true"
+        fluentd-retry-wait: "1s"
+        fluentd-max-retries: "30"
+        tag: minitwit_service
 
   prometheus:
     image: prom/prometheus:v2.51.0-rc.0
@@ -29,6 +33,15 @@ services:
       - ./configuration_files/prometheus.yml:/etc/prometheus/prometheus.yml
     networks:
       - itu-minitwit-network
+    depends_on:
+      - fluentd
+    logging:
+      driver: fluentd
+      options:
+        fluentd-async-connect: "true"
+        fluentd-retry-wait: "1s"
+        fluentd-max-retries: "30"
+        tag: prometheus
 
   grafana:
     image: grafana/grafana:10.2.4
@@ -48,6 +61,26 @@ services:
       - ./configuration_files/grafana_dashboard_0.json:/var/lib/grafana/dashboards/grafana_dashboard_0.json
       - ./configuration_files/grafana_dashboard_1.json:/var/lib/grafana/dashboards/grafana_dashboard_1.json
       - ./configuration_files/prometheus_datasource.yaml:/etc/grafana/provisioning/datasources/prometheus_datasource.yaml
+    depends_on:
+      - fluentd
+    logging:
+      driver: fluentd
+      options:
+        fluentd-async-connect: "true"
+        fluentd-retry-wait: "1s"
+        fluentd-max-retries: "30"
+        tag: grafana
+  
+  fluentd:
+    image: fluent/fluentd:v1.12-debian
+    volumes:
+      - ./configuration_files/fluent.conf:/fluentd/etc/fluent.conf
+      - /var/log/fluentd:/fluentd/log
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    networks:
+      - itu-minitwit-network
 
 volumes:
   grafana_data:
