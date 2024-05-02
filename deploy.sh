@@ -15,8 +15,10 @@ REGISTRY="ghcr.io"
 echo "--Logging in to github package repo--"
 echo $GH_PASS | docker login $REGISTRY -u $GH_USER --password-stdin
 
+dock
+
 echo "--Starting the stack--"
-docker stack deploy --compose-file compose.yml minitwit-stack
+docker stack deploy --compose-file compose.yml --detach=false minitwit-stack
 
 echo "--Logging out of github package repo--"
 docker logout $REGISTRY
