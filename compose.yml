@@ -24,6 +24,14 @@ services:
         fluentd-retry-wait: "1s"
         fluentd-max-retries: "30"
         tag: minitwit_service
+    deploy:
+      mode: replicated
+      replicas: 2
+      endpoint_mode: vip
+      update_config:
+        parallelism: 1
+      rollback_config:
+        parallelism: 1
 
   prometheus:
     image: prom/prometheus:v2.51.0-rc.0
@@ -42,6 +50,8 @@ services:
         fluentd-retry-wait: "1s"
         fluentd-max-retries: "30"
         tag: prometheus
+    deploy:
+      mode: global
 
   grafana:
     image: grafana/grafana:10.2.4
@@ -78,6 +88,8 @@ services:
         fluentd-retry-wait: "1s"
         fluentd-max-retries: "30"
         tag: grafana
+    deploy:
+      mode: global
   
   fluentd:
     image: fluent/fluentd:v1.12-debian
@@ -90,6 +102,8 @@ services:
       - "24224:24224/udp"
     networks:
       - itu-minitwit-network
+    deploy:
+      mode: global
 
 volumes:
   grafana_data:
