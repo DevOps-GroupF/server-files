@@ -24,7 +24,7 @@ docker stack deploy --compose-file compose.yml --detach=false minitwit-stack
 echo "--Logging out of github package repo--"
 docker logout $REGISTRY
 
-echo "--Executing the post-setup for grafana--"
-./configuration_files/grafana_user_setup.sh
+#echo "--Executing the post-setup for grafana--"
+#./configuration_files/grafana_user_setup.sh
 
 exit 0
