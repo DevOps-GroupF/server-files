@@ -5,7 +5,6 @@ networks:
 
 services:
   minitwit-service:
-    container_name: minitwit-container
     image: ghcr.io/devops-groupf/itu-minitwit-devops:latest
     environment:
       - DB_CONN_STRING=${DB_CONN_STRING}
