@@ -25,7 +25,7 @@ services:
         tag: minitwit_service
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 3
       endpoint_mode: vip
       update_config:
         parallelism: 1
@@ -50,7 +50,10 @@ services:
         fluentd-max-retries: "30"
         tag: prometheus
     deploy:
-      mode: global
+      replicas: 1
+      placement:
+        constraints:
+            - node.role == manager
 
   grafana:
     image: grafana/grafana:10.2.4
@@ -88,7 +91,11 @@ services:
         fluentd-max-retries: "30"
         tag: grafana
     deploy:
-      mode: global
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+            - node.role == manager
   
   fluentd:
     image: fluent/fluentd:v1.12-debian
@@ -101,7 +108,11 @@ services:
     networks:
       - itu-minitwit-network
     deploy:
-      mode: global
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+            - node.role == manager
 
 volumes:
   grafana_data:
