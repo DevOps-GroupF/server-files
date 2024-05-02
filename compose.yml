@@ -31,6 +31,9 @@ services:
         parallelism: 1
       rollback_config:
         parallelism: 1
+      placement:
+        constraints:
+          - "node.role==worker"
 
   prometheus:
     image: prom/prometheus:v2.51.0-rc.0
