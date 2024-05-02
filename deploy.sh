@@ -19,7 +19,7 @@ echo "--Pulling the images--"
 docker compose pull
 
 echo "--Starting the stack--"
-docker stack deploy --compose-file compose.yml --detach=false minitwit-stack
+docker stack deploy --compose-file compose.yml --detach=false --with-registry-auth minitwit-stack
 
 echo "--Logging out of github package repo--"
 docker logout $REGISTRY
