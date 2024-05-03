@@ -83,7 +83,7 @@ datasources:
       password: ${DB_CONN_PASSWORD}
     jsonData:
       database: defaultdb
-      sslmode: 'disable' # disable/require/verify-ca/verify-full
+      sslmode: 'require' # disable/require/verify-ca/verify-full
       maxOpenConns: 100 # Grafana v5.4+
       maxIdleConns: 100 # Grafana v5.4+
       maxIdleConnsAuto: true # Grafana v9.5.1+
