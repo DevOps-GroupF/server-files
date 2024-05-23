@@ -107,6 +107,7 @@ services:
     container_name: fluentd-container
     volumes:
       - ./configuration_files/fluent.conf:/fluentd/etc/fluent.conf
+      - /var/log/fluentd:/fluentd/log
     ports:
       - "24224:24224"
       - "24224:24224/udp"
