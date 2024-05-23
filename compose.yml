@@ -5,7 +5,6 @@ networks:
 
 services:
   minitwit-service:
-    container_name: minitwit-container
     image: ghcr.io/devops-groupf/itu-minitwit-devops:latest
     environment:
       - DB_CONN_STRING=${DB_CONN_STRING}
@@ -24,6 +23,17 @@ services:
         fluentd-retry-wait: "1s"
         fluentd-max-retries: "30"
         tag: minitwit_service
+    deploy:
+      mode: replicated
+      replicas: 3
+      endpoint_mode: vip
+      update_config:
+        parallelism: 1
+      rollback_config:
+        parallelism: 1
+      placement:
+        constraints:
+          - node.role == worker
 
   prometheus:
     image: prom/prometheus:v2.51.0-rc.0
@@ -42,6 +52,11 @@ services:
         fluentd-retry-wait: "1s"
         fluentd-max-retries: "30"
         tag: prometheus
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+            - node.role == manager
 
   grafana:
     image: grafana/grafana:10.2.4
@@ -78,18 +93,29 @@ services:
         fluentd-retry-wait: "1s"
         fluentd-max-retries: "30"
         tag: grafana
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+            - node.role == manager
   
   fluentd:
     image: fluent/fluentd:v1.12-debian
     container_name: fluentd-container
     volumes:
       - ./configuration_files/fluent.conf:/fluentd/etc/fluent.conf
-      - /var/log/fluentd:/fluentd/log
     ports:
       - "24224:24224"
       - "24224:24224/udp"
     networks:
       - itu-minitwit-network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+            - node.role == manager
 
 volumes:
   grafana_data:

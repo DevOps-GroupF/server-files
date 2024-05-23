@@ -82,8 +82,8 @@ datasources:
     secureJsonData:
       password: ${DB_CONN_PASSWORD}
     jsonData:
-      database: postgres
-      sslmode: 'disable' # disable/require/verify-ca/verify-full
+      database: defaultdb
+      sslmode: 'require' # disable/require/verify-ca/verify-full
       maxOpenConns: 100 # Grafana v5.4+
       maxIdleConns: 100 # Grafana v5.4+
       maxIdleConnsAuto: true # Grafana v9.5.1+

@@ -18,14 +18,13 @@ echo $GH_PASS | docker login $REGISTRY -u $GH_USER --password-stdin
 echo "--Pulling the images--"
 docker compose pull
 
-
-echo "--Starting the container--"
-docker compose up -d
+echo "--Starting the stack--"
+docker stack deploy --compose-file compose.yml --detach=false --with-registry-auth minitwit-stack
 
 echo "--Logging out of github package repo--"
 docker logout $REGISTRY
 
-echo "--Executing the post-setup for grafana--"
-./configuration_files/grafana_user_setup.sh
+#echo "--Executing the post-setup for grafana--"
+#./configuration_files/grafana_user_setup.sh
 
 exit 0
