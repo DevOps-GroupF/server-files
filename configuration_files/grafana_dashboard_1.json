@@ -812,7 +812,7 @@
       {
         "hide": 2,
         "name": "instance",
-        "query": "twit-swarm-test-8-worker-0:8080",
+        "query": "minitwit-service:8080",
         "skipUrlSync": false,
         "type": "constant"
       },
