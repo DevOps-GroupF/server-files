@@ -705,7 +705,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT COUNT(*) FROM user",
+          "rawSql": "SELECT COUNT(*) FROM \"user\"",
           "refId": "A",
           "sql": {
             "columns": [
